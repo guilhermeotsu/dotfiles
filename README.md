@@ -1,1 +1,1 @@
-# Arquivos WSL 2
+# Arquivos Windows Terminal - WSL 2
