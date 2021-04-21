@@ -24,6 +24,11 @@ Plug 'valloric/MatchTagAlways'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'Shougo/vimproc.vim'
+Plug 'rhysd/git-messenger.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 call plug#end()
 
 :map <C-n> :NERDTreeToggle<CR>
@@ -53,8 +58,9 @@ autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR
 
 
 " The following commands are contextual, based on the cursor position.
-" autocmd FileType cs nnoremap <buffer>
-" autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
+autocmd FileType cs nnoremap <buffer>
+autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
+
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:airline_powerline_fonts=1
 let g:tmuxline_powerline_separators = 0
@@ -150,3 +156,8 @@ let g:ale_linters = {
 let g:user_emmet_install_global=0
 autocmd FileType html,css,cshtml EmmetInstall
 imap hh <C-y>,
+
+let g:syntastic_cs_checkers = ['code_checker']
+
+set shell=bash
+
