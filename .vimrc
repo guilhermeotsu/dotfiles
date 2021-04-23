@@ -32,7 +32,7 @@ Plug 'junegunn/limelight.vim'
 call plug#end()
 
 :map <C-n> :NERDTreeToggle<CR>
-:map <C-p> :GFiles<CR>
+:map <C-p> :GFiles --cached --others --exclude-standard<CR>
 :map <C-f> :Files<CR>
 "collapse json files by themselves.
 :map <C-j> :set filetype=json \| :syntax on \| :set foldmethod=syntax
@@ -67,7 +67,7 @@ let g:tmuxline_powerline_separators = 0
 " set background=dark
 "colorscheme Monokai
 colorscheme minimalist
-let g:airline_theme='minimalist'
+let g:airline_theme='molokai'
 set number
 set relativenumber
 " Toggle relative line number
@@ -97,6 +97,10 @@ let g:fzf_preview_window = 'right:60%'
 " vim wiki settings.
 set nocompatible
 filetype plugin on
+set hlsearch
+
+hi Search guibg=peru guifg=wheat
+
 syntax on
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
@@ -161,3 +165,16 @@ let g:syntastic_cs_checkers = ['code_checker']
 
 set shell=bash
 
+" Add html syntax in razor
+autocmd BufNewFile,BufRead *.cshtml set syntax=html
+
+" Goyo + limelight
+let g:goyo_width = 120
+let g:limelight_default_coefficient = 0.7
+
+map <leader>gy :Goyo<CR>
+map <leader>ll :Limelight!!<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+let g:airline#extensions#tabline#enabled = 1
