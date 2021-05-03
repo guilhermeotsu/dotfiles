@@ -29,6 +29,7 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main'  }
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 :map <C-n> :NERDTreeToggle<CR>
