@@ -27,18 +27,22 @@ Plug 'leafgarland/typescript-vim'
 Plug 'Shougo/vimproc.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'vim-syntastic/syntastic'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main'  }
 call plug#end()
 
 :map <C-n> :NERDTreeToggle<CR>
+:map <C-m> :NERDTreeFocus<CR>
 :map <C-p> :GFiles --cached --others --exclude-standard<CR>
-:map <C-f> :Files<CR>
+:map <C-q> :Files<CR> 
 "collapse json files by themselves.
 :map <C-j> :set filetype=json \| :syntax on \| :set foldmethod=syntax
 "zo for open
 "zc for close
 
+:filetype indent on
+:set filetype=html
+:set smartindent
 " Auto indent your file.
 map <F7> gg=G<C-o><C-o>
 " Navigate Tabs
@@ -178,3 +182,37 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 let g:airline#extensions#tabline#enabled = 1
+
+autocmd FileType typescript setlocal completeopt+=menu,preview
+
+" CoC extensions
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-actions',
+  \ 'coc-lists',
+  \ 'coc-tsserver',
+  \ 'coc-css',
+  \ 'coc-prettier',
+  \ 'coc-omnisharp',
+  \ 'coc-vimlsp',
+  \ 'coc-angular',
+  \ ]
+
+nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> gf <Plug>(coc-definition)
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+
