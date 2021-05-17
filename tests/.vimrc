@@ -19,6 +19,8 @@ Plug 'mattn/emmet-vim'
 Plug 'dense-analysis/ale'
 Plug 'puremourning/vimspector'
 Plug 'OmniSharp/omnisharp-vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'iamcco/markdown-preview.nvim'
 call plug#end()
 
 " Configs
@@ -116,6 +118,7 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-vimlsp',
   \ 'coc-angular',
+  \ 'coc-vetur'
   \ ]
 
 set hidden
