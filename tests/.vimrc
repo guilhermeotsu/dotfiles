@@ -24,6 +24,7 @@ Plug 'iamcco/markdown-preview.nvim'
 call plug#end()
 
 " Configs
+syntax enable
 :filetype indent on
 set encoding=utf-8
 :set filetype=html
@@ -32,7 +33,9 @@ set number
 set relativenumber
 scriptencoding utf-8
 
-" Add html syntax in razor
+let g:deoplete#enable_at_startup = 1
+
+"  Add html syntax in razor
 autocmd BufNewFile,BufRead *.cshtml set syntax=html
 
 " vimspector
@@ -64,13 +67,9 @@ autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
 autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
 autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
 
+
 autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
-
-
-" The following commands are contextual, based on the cursor position.
-autocmd FileType cs nnoremap <buffer>
-autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
 
 " Emmet
 let g:user_emmet_install_global=0
@@ -85,7 +84,8 @@ imap hh <C-y>,
 :map <C-n> :NERDTreeToggle<CR>
 
 " Tabs Configs - FAZER ISSO
-" :map <C-t><n> :tabnew<CR>
+noremap <Tab> :bn<CR>
+noremap <S-Tab> :bp<CR>
 
 " Gruvbox colorsheme
 colorscheme gruvbox8
