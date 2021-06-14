@@ -20,12 +20,12 @@ Plug 'dense-analysis/ale'
 Plug 'puremourning/vimspector'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'iamcco/markdown-preview.nvim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 
 " Configs
 syntax enable
-:filetype indent on
+" :filetype indent on
 set encoding=utf-8
 :set filetype=html
 :set smartindent
@@ -33,7 +33,14 @@ set number
 set relativenumber
 scriptencoding utf-8
 
-let g:deoplete#enable_at_startup = 1
+nnoremap x "_x
+nnoremap d "_d
+nnoremap D "_D
+vnoremap d "_d
+
+nnoremap <leader>d ""d
+nnoremap <leader>D ""D
+vnoremap <leader>d ""d
 
 "  Add html syntax in razor
 autocmd BufNewFile,BufRead *.cshtml set syntax=html
@@ -47,8 +54,8 @@ xmap <Leader>di <Plug>VimspectorBalloonEval
 
 " Ale Config
 let g:ale_linters_ignore = {
-      \   'typescript': ['tslint'],
-      \}
+\   'typescript': ['tslint'],
+\}
 
 let g:ale_sign_error = '•'
 let g:ale_sign_warning = '•'
@@ -66,7 +73,7 @@ autocmd FileType cs nmap <silent> gd :OmniSharpGotoDefinition<CR>
 autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
 autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
 autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
-
+autocmd FileType cs nmap <silent> <buffer> <Leader>osfx <Plug>(omnisharp_fix_usings)
 
 autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
@@ -82,6 +89,7 @@ imap hh <C-y>,
 
 " NERDTree
 :map <C-n> :NERDTreeToggle<CR>
+:map <C-m> :NERDTreeFocus<CR>
 
 " Tabs Configs - FAZER ISSO
 noremap <Tab> :bn<CR>
@@ -94,7 +102,6 @@ colorscheme gruvbox8
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1  " https://github.com/vim-airline/vim-airline#unique_tail
 let g:airline#extensions#tabline#formatte = 'unique_tail'  " https://github.com/vim-airline/vim-airline#unique_tail
-
 
 
 
