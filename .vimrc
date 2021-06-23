@@ -8,148 +8,75 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'flazz/vim-colorschemes'
+Plug 'lifepillar/vim-gruvbox8'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'puremourning/vimspector'
-Plug 'prettier/vim-prettier', { 'do': 'npm install' , 'branch' : 'release/1.x' }
-Plug 'dense-analysis/ale'
-"Fuzzy Search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'valloric/MatchTagAlways'
+Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'Shougo/vimproc.vim'
-Plug 'rhysd/git-messenger.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main'  }
-Plug 'tpope/vim-commentary'
+Plug 'dense-analysis/ale'
+Plug 'puremourning/vimspector'
+Plug 'ryanoasis/vim-devicons'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'wakatime/vim-wakatime'
 call plug#end()
 
-:map <C-n> :NERDTreeToggle<CR>
-:map <C-m> :NERDTreeFocus<CR>
-:map <C-p> :GFiles --cached --others --exclude-standard<CR>
-:map <C-q> :Files<CR> 
-"collapse json files by themselves.
-:map <C-j> :set filetype=json \| :syntax on \| :set foldmethod=syntax
-"zo for open
-"zc for close
-
-:filetype indent on
+" Configs
+syntax enable
+" :filetype indent on
+set encoding=utf-8
 :set filetype=html
 :set smartindent
-" Auto indent your file.
-map <F7> gg=G<C-o><C-o>
-" Navigate Tabs
-map <C-t><up> :tabr<cr>
-map <C-t><down> :tabl<cr>
-map <C-t><left> :tabp<cr>
-map <C-t><right> :tabn<cr>
-
-" Supprot for different goto definitions for different file types.
-autocmd FileType cs nmap <silent> gd :OmniSharpGotoDefinition<CR>
-autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
-autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
-autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
-
-autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
-autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
-
-
-" The following commands are contextual, based on the cursor position.
-autocmd FileType cs nnoremap <buffer>
-autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
-
-let g:vimspector_enable_mappings = 'HUMAN'
-let g:airline_powerline_fonts=1
-let g:tmuxline_powerline_separators = 0
-" set background=dark
-"colorscheme Monokai
-colorscheme minimalist
-let g:airline_theme='molokai'
 set number
 set relativenumber
-" Toggle relative line number
-nmap <C-L><C-L> :set norelativenumber<CR>
-map  <C-R><C-L> :set relativenumber<CR>
-
-set encoding=utf-8
 scriptencoding utf-8
-let g:airline#extensions#tmuxline#enabled = 0
 
-" How tab behaves while picking auto complete.
-let g:SuperTabMappingForward = '<S-Tab>'
-let g:SuperTabMappingBackward = '<Tab>'
+" =============== Scrolling ========================
 
-:set tabstop=4
-:set shiftwidth=4
-:set expandtab
+set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set sidescrolloff=15
+set sidescroll=1
 
-set clipboard+=unnamedplus
-" Move Swap Directory to something temporary.
-set directory^=$HOME/tempswap//
+" ================ Search ===========================
 
-" This directory should exist.
-" Always enable preview window on the right with 60% width
-let g:fzf_preview_window = 'right:60%'
+set incsearch       " Find the next match as we type the search
+set hlsearch        " Highlight searches by default
+set ignorecase      " Ignore case when searching...
+set smartcase       " ...unless we type a capital
 
-" vim wiki settings.
-set nocompatible
-filetype plugin on
-set hlsearch
+" coc.vim config
+set hidden
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-hi Search guibg=peru guifg=wheat
+nnoremap x "_x
+nnoremap d "_d
+nnoremap D "_D
+vnoremap d "_d
 
-syntax on
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+nnoremap <leader>d ""d
+nnoremap <leader>D ""D
+vnoremap <leader>d ""d
 
+"  Add html syntax in razor
+autocmd BufNewFile,BufRead *.cshtml set syntax=html
 
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+" vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+" for normal mode - the word under the cursor
+" nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-" ctrl+p when you move to a file this highlights it.
-let g:nerdtree_sync_cursorline = 1
-
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-
-" Read gitignore and dont show relevant files in ctrlp.
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:prettier#config#parser = 'babylon'
-" hi Normal ctermbg=none
-"
-" For Coc Action Menu to work.
-" Remap for do codeAction of selected region
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
-
+" Ale Config
 let g:ale_linters_ignore = {
-      \   'typescript': ['tslint'],
-      \}
+\   'typescript': ['tslint'],
+\}
 
 let g:ale_sign_error = '•'
 let g:ale_sign_warning = '•'
@@ -157,35 +84,47 @@ let g:ale_sign_info = '·'
 let g:ale_sign_style_error = '·'
 let g:ale_sign_style_warning = '·'
 
-let g:ale_linters = {
-\ 'cs': ['OmniSharp']
-\}
+" let g:ale_linters = {
+" \ 'cs': ['OmniSharp']
+" \}
 
 " Emmet
 let g:user_emmet_install_global=0
 autocmd FileType html,css,cshtml EmmetInstall
 imap hh <C-y>,
 
-let g:syntastic_cs_checkers = ['code_checker']
+" Fzf Config
+:map <C-p> :GFiles --cached --others --exclude-standard<CR>
+:map <C-q> :Files<CR>
 
-set shell=bash
+" NERDTree
+:map <C-n> :NERDTreeToggle<CR>
+:map <C-m> :NERDTreeFocus<CR>
 
-" Add html syntax in razor
-autocmd BufNewFile,BufRead *.cshtml set syntax=html
+" Buffer nav
+noremap <Tab> :bn<CR>
+noremap <S-Tab> :bp<CR>
 
-" Goyo + limelight
-let g:goyo_width = 120
-let g:limelight_default_coefficient = 0.7
+" Gruvbox colorsheme
+colorscheme gruvbox8
 
-map <leader>gy :Goyo<CR>
-map <leader>ll :Limelight!!<CR>
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+" Airline Configs
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1  " https://github.com/vim-airline/vim-airline#unique_tail
+let g:airline#extensions#tabline#formatte = 'unique_tail'  " https://github.com/vim-airline/vim-airline#unique_tail
 
-let g:airline#extensions#tabline#enabled = 1
 
-autocmd FileType typescript setlocal completeopt+=menu,preview
 
+" Coc Config https://github.com/neoclide/coc.nvim#example-vim-configuration
+
+"
+"   ccccccccc   ooooooooo    cccccccc
+" cc		o	o  cc
+" cc            o	o  cc
+" cc		o	o  cc
+" cc		o	o  cc
+"   ccccccccc   ooooooooo    ccccccccc
+"
 " CoC extensions
 let g:coc_global_extensions = [
   \ 'coc-snippets',
@@ -194,26 +133,127 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-css',
   \ 'coc-prettier',
-  \ 'coc-omnisharp',
   \ 'coc-vimlsp',
   \ 'coc-angular',
+  \ 'coc-vetur',
+  \ 'coc-omnisharp'
   \ ]
 
-nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> gf <Plug>(coc-definition)
+set hidden
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+set nobackup
+set nowritebackup
 
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+set cmdheight=2
+set updatetime=300
 
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+set shortmess+=c
+
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" GoTo code navigation. -- important
+"nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
 endfunction
 
-inoremap <silent><expr> <c-space> coc#refresh()
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+"
+"   ccccccccc   ooooooooo    cccccccc
+" cc		o	o  cc
+" cc            o	o  cc
+" cc		o	o  cc
+" cc		o	o  cc
+"   ccccccccc   ooooooooo    ccccccccc
+"
+"

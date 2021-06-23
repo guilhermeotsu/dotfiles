@@ -21,6 +21,7 @@ Plug 'puremourning/vimspector'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'wakatime/vim-wakatime'
 call plug#end()
 
 " Configs
@@ -91,7 +92,7 @@ imap hh <C-y>,
 :map <C-n> :NERDTreeToggle<CR>
 :map <C-m> :NERDTreeFocus<CR>
 
-" Tabs Configs - FAZER ISSO
+" Buffer nav
 noremap <Tab> :bn<CR>
 noremap <S-Tab> :bp<CR>
 
