@@ -104,6 +104,8 @@ alias code="code-insiders"
 alias c="cd /mnt/c/"
 alias d="cd /mnt/d/"
 alias unica="cd /mnt/d/Unica"
+alias ps="powershell.exe"
+alias ver="lsb_release -a"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
