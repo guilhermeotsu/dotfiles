@@ -10,6 +10,7 @@ dotfile environment dev for csharp/angular
 
 ## vs and ssms
 - install viemu and import files vs/sql.vssettings
+- add .viemurc in $home/$path
 
 ## how to use install
 - git clone
