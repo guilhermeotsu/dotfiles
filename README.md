@@ -20,4 +20,4 @@ dotfile environment dev for csharp/angular
 - dotnet sdk
 - node
 - fonts (nerdfont - caskaydiacove nerd font)
-
+- fd in ubuntu
