@@ -1,6 +1,6 @@
 let mapleader = " "
 
-imap jj <Esc>
+inoremap jj <Esc>
 
 filetype plugin indent on
 
@@ -15,16 +15,26 @@ set incsearch
 set hlsearch
 set ignorecase
 set clipboard=unnamedplus
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 set completeopt=menu,menuone,noselect
+
+set colorcolumn=72
+
+let g:AutoPairsShortcutToggle = '<C-p>'
+
+let g:user_emmet_install_global=0
+autocmd FileType html,css,cshtml,js,jsx EmmetInstall
+
+let g:vimspector_enable_mappings = 'HUMAN'
 
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate'}
+" Plug 'romgrk/nvim-treesitter-context'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -47,6 +57,8 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/goyo.vim'
 Plug 'mattn/emmet-vim'
 
+" Plug 'OmniSharp/omnisharp-vim'
+Plug 'puremourning/vimspector'
 Plug 'mfussenegger/nvim-dap'
 call plug#end()
 
@@ -57,15 +69,15 @@ lua << EOF
 	local pid = vim.fn.getpid()
 	local omnisharp_bin = "/home/otsu/.omnisharp/omnisharp/OmniSharp"
 
-	require'nvim-treesitter.configs'.setup {
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			ident = {
-				enable = true
-			}
-	}
+--	require'nvim-treesitter.configs'.setup {
+--			highlight = {
+--				enable = true,
+--				additional_vim_regex_highlighting = false,
+--			},
+--			ident = {
+--				enable = true
+--			}
+--	}
 
 	local cmp = require'cmp'
 	cmp.setup({
@@ -106,10 +118,12 @@ lua << EOF
 	lsp.cssls.setup{
 		capabilities = capabilitiesCmp
 	}
+
 	lsp.jsonls.setup{ capabilities = capabilities, }
 	lsp.html.setup{ capabilities = capabilities, filetypes = { "html", "cshtml" }}
 	lsp.tsserver.setup{}
 	lsp.angularls.setup{}
+	lsp.vimls.setup{}
 
 	require "lsp_signature".setup{
 		bind = true,
@@ -117,80 +131,79 @@ lua << EOF
 		floating_window = true,
 	}
 
+
 	local dap = require('dap')
 	dap.adapters.netcoredbg = {
 		type = 'executable',
-		command = '/home/otsu/Downloads/netcoredbg/netcoredbg/netcoredbg',
+		command = '/home/otsu/.netcoredbg/netcoredbg',
 		args = {'--interpreter=vscode'}
 	}
 
 	dap.configurations.cs = {
-		{
-			type = "netcoredbg",
-			name = "launch - netcoredbg",
-			request = "launch",
-			program = function()
-					return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-			end,
-		},
-	}
+  {
+    type = "netcoredbg",
+    name = "launch - netcoredbg",
+    request = "launch",
+    program = function()
+        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+    end,
+  },
+}
+
+--vim.fn.sign_define('DapBreakpoint', {text='🟥', texthl='', linehl='', numhl=''})
+--vim.fn.sign_define('DapStopped', {text='⭐️', texthl='', linehl='', numhl=''})
 EOF
 
-" Serach in current file or all buffer ctags fzf
-function s:gtags_search(line)
-     let l:line = split(a:line)[1]
-     let l:file = split(a:line)[2]
-     execute 'edit +'.l:line l:file
-endfunction
+" emmet snippet
+autocmd FileType html, css, js, tsx, ts <buffer> imap hh <C-y>,
 
- nnoremap <silent> <Leader>t :call fzf#run(fzf#wrap({'source':'global -x .', 'sink':function('<sid>gtags_search'),
-             \ 'options': ['-m', '-d', '\t', '--with-nth', '1,2', '-n', '1', '--prompt', 'Tags> ']}))<CR>
+noremap <leader>y "*y
+noremap <leader>p "*p
+noremap <leader>Y "+y
+noremap <leader>P "+p
 
-let g:user_emmet_install_global=0
-autocmd FileType html,css,cshtml,js,jsx EmmetInstall
-imap hh <C-y>,
-
-let g:NetrwIsOpen=0
-
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i 
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Lexplore
-    endif
-endfunction
-
-" Add your own mapping. For example:
 noremap <silent><leader>n :NERDTreeToggle<CR>
 
 " clear highlighting on escape in normal mode
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[C
 
-nnoremap <silent> <leader>w :w<CR>
+nnoremap <silent><leader>w :w<CR>
 
 nnoremap <silent><leader>p :GFiles --cached --others --exclude-standard<CR>
 nnoremap <silent><leader><leader> :Files<CR>
 nnoremap <silent><leader>ff :Rg<CR>
 nnoremap <silent><leader>b :Buffers<CR>
 
-nnoremap <silent><F9>  :lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent><F5>  :lua require'dap'.continue()<CR>
-nnoremap <silent><F10> :lua require'dap'.step_over()<CR>
-nnoremap <silent><F11> :lua require'dap'.step_into()<CR>
-nnoremap <silent><F12> :lua require'dap'.repl.open()<CR>
-
 nnoremap <silent>gd :lua vim.lsp.buf.definition()<CR>
-nnoremap <silent>im :lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>i :lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>re :References<CR>
 nnoremap <leader>si :lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>ac :CodeActions<CR>
 nnoremap <silent>K :lua vim.lsp.buf.hover()<CR>
+
+" nnoremap <leader>dh :lua require'dap'.toggle_breakpoint()<CR>
+" nnoremap <S-k> :lua require'dap'.step_out()<CR>
+" nnoremap <S-l> :lua require'dap'.step_into()<CR>
+" nnoremap <S-j> :lua require'dap'.step_over()<CR>
+" nnoremap <leader>ds :lua require'dap'.stop()<CR>
+" nnoremap <leader>dn :lua require'dap'.continue()<CR>
+" nnoremap <leader>dk :lua require'dap'.up()<CR>
+" nnoremap <leader>dj :lua require'dap'.down()<CR>
+" nnoremap <leader>d_ :lua require'dap'.disconnect();require'dap'.stop();require'dap'.run_last()<CR>
+" nnoremap <leader>dr :lua require'dap'.repl.open({}, 'vsplit')<CR><C-w>l
+" nnoremap <leader>di :lua require'dap.ui.variables'.hover()<CR>
+" vnoremap <leader>di :lua require'dap.ui.variables'.visual_hover()<CR>
+" nnoremap <leader>d? :lua require'dap.ui.variables'.scopes()<CR>
+" nnoremap <leader>de :lua require'dap'.set_exception_breakpoints({"all"})<CR>
+" nnoremap <leader>da :lua require'debugHelper'.attach()<CR>
+" nnoremap <leader>dA :lua require'debugHelper'.attachToRemote()<CR>
+" nnoremap <leader>di :lua require'dap.ui.widgets'.hover()<CR>
+" nnoremap <leader>d? :lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>
+"
+" mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
