@@ -8,7 +8,7 @@ I'm a dotnet developer and studie some stuffs.
 - [fish:](https://github.com/fish-shell/fish-shell) too lazy to configure zsh, just use for auto suggestion/complete
 - [neovim:](https://github.com/neovim/neovim) my love
 - [tmux:](https://github.com/tmux/tmux) multiplex terminal like hacker
-- [z:](https://github.com/rupa/z) jumper directories goood
+- [z:](https://github.com/rupa/z) jumper directories goood 
 
 ## Todo
 - [ ] Organize my neovim configure
