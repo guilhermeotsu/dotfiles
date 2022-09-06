@@ -2,10 +2,7 @@
 
 I'm a dotnet developer and studie some stuffs.
 
-I like to keep my enviroment simple, so i just have LSP, some server configured,
-Treesiter for syntax-highlited and Fuzzy Finder, that's all i need.
-
-## Overview
+## What i use
 - [i3:](https://github.com/i3/i3) workspaces goood, i feeling like parkour
 - [alacritty:](https://github.com/alacritty/alacritty) don't know i just use this, it's fast
 - [fish:](https://github.com/fish-shell/fish-shell) too lazy to configure zsh, just use for auto suggestion/complete
