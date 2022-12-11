@@ -18,7 +18,3 @@ map('n', '<leader><leader>', ':Files<CR>')
 map('n', '<leader>p', ':GFiles<CR>')
 map('n', '<leader>b', ':Buffers<CR>')
 map('n', '<esc>', ':noh<return><esc>')
-
---map('n', 'gi', 'vim.lsp.buf.implementation')
-map('n', '<leader>ac', 'vim.lsp.buf.code_actions')
---map('n', 'gd', 'vim.lsp.buf.definition')

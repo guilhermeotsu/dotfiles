@@ -26,14 +26,14 @@ opt.colorcolumn          = '72'
 opt.autoindent           = true
 opt.list                 = true
 opt.listchars            = 'tab:┼─'
-opt.clipboard:append('unnamedplus')
+opt.clipboard:append('unnamedplus') -- not working in my workflow :(
 opt.backup               = true
 opt.backupdir            = '/tmp//,.'
 opt.writebackup          = false
 opt.swapfile             = false
 opt.wrap                 = false
 opt.backspace            = 'indent,eol,start'
-opt.guicursor            = 'i:block'
-vim.o.paste              = true
+opt.guicursor            = 'i:block' -- chad fat cursor insert mode
+vim.o.paste              = true -- dont know what the hell is this
 vim.o.encoding           = 'utf-8'
 vim.o.fileencoding       = 'utf-8'

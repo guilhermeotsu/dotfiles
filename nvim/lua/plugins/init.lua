@@ -1,30 +1,39 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
+
+    -- improve performance
     use { 
+        'lewis6991/impatient.nvim',
+        config = function() require('impatient') end,
+    }
+
+    -- align lines a little unselles, just use in options.lua
+    use {
         'Vonr/align.nvim',
-        config = function() require('align') end
+        config = function() require('plugins.align') end,
     }
 
     -- config server/lsp automacally
     use { 
         'williamboman/mason.nvim',
-        config = function() require('mason') end,
     }
-    use 'williamboman/mason-lspconfig.nvim'
+    use { 
+        'williamboman/mason-lspconfig.nvim',
+        config = function() require('plugins.mason') end,
+    }
 
-    -- i think it's unselless
-    use {
-        'neovim/nvim-lspconfig',
-        config = function() require('lsp') end,
-    }
+   use {
+       'neovim/nvim-lspconfig',
+       config = function() require('plugins.lsp') end,
+   }
 
     -- autocomplete
     use {
         'hrsh7th/nvim-cmp',
-        config = function() require('cmp') end,
+        config = function() require('plugins.cmp') end,
     }
+
     use 'hrsh7th/cmp-buffer' -- buffer completions
     use 'hrsh7th/cmp-path' -- path completions
     use 'hrsh7th/cmp-cmdline' -- cmdline completions
@@ -38,7 +47,7 @@ return require('packer').startup(function(use)
     -- syntax, highlight
     use { 
         'nvim-treesitter/nvim-treesitter',
-        config = function() require('treesitter') end,
+        config = function() require('plugins.treesitter') end,
     }
 
     use 'iamcco/markdown-preview.nvim'
@@ -48,13 +57,13 @@ return require('packer').startup(function(use)
     use ({
         'glepnir/lspsaga.nvim',
         branch = 'main',
-        config = function() require('saga') end,
+        config = function() require ('plugins.saga') end,
     })
 
     -- navigate between overload methods
     use { 
         'Issafalcon/lsp-overloads.nvim',
-        config = function() require('lsp-overloads') end,
+        config = function() require ('plugins.lsp-overloads') end,
     }
 
     -- tabs view
@@ -62,13 +71,12 @@ return require('packer').startup(function(use)
     use {
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-      config = function() require('lualine') end
+      config = function() require('lualine').setup() end
     }
 
     -- colorsheme
     use { 
-        'catppuccin/nvim',
-        config = function() require('') end
+        'catppuccin/nvim'
     }
 
     -- comment code
