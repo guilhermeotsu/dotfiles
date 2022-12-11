@@ -12,7 +12,7 @@ I'm a dotnet developer and studie some stuffs.
 - [z:](https://github.com/rupa/z) jumper directories goood 
 
 ## Todo
-- [ ] Organize my neovim configure
+- [x] Organize my neovim configure (lua)
 - [ ] Improve keymaps in my workflow with neovim (lsp, fzf, ripgrep)
 - [ ] Better way to copy/paste between neovim/tmux/so
 - [ ] Make my setup more beautiful
