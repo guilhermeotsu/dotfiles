@@ -10,8 +10,8 @@ nvim_comment.setup(
   }
 )
 
-vim.api.nvim_set_keymap("n", "<leader>/", ":CommentToggle<CR>", { silent = true })
-vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "gc", ":CommentToggle<CR>", { silent = true })
+vim.api.nvim_set_keymap("v", "gc", ":CommentToggle<CR>", { silent = true })
 
 local ts_config_status_ok, ts_configs = pcall(require, "nvim-treesitter.configs")
 if not ts_config_status_ok then

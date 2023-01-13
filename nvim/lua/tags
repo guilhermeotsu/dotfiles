@@ -1,0 +1,24 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/otsu/.config/nvim/lua/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20220828.0/
+['<S-Tab>']	plugins/cmp.lua	/^    ['<S-Tab>'] = cmp.mapping(function(fallback)$/;"	f
+['<Tab>']	plugins/cmp.lua	/^    ['<Tab>'] = cmp.mapping(function(fallback)$/;"	f
+config	plugins/init.lua	/^        config = function() $/;"	f
+config	plugins/init.lua	/^        config = function()$/;"	f
+config	plugins/init.lua	/^       config = function() $/;"	f
+config	plugins/init.lua	/^       config = function() require ('plugins.lsp-overloads') end,$/;"	f
+config	plugins/init.lua	/^       config = function() require('plugins.saga') end,$/;"	f
+config	plugins/init.lua	/^       config = function()$/;"	f
+config	plugins/init.lua	/^     config = function() require('lualine').setup() end,$/;"	f
+expand	plugins/cmp.lua	/^    expand = function(args)$/;"	f
+hook	plugins/comment.lua	/^    hook = function()$/;"	f
+map	keymap.lua	/^local function map(mode, lhs, rhs, opts)$/;"	f
+on_attach	lsp/init.lua	/^local on_attach = function(client, bufnr)$/;"	f
