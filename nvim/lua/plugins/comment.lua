@@ -1,4 +1,5 @@
 local status_ok, nvim_comment = pcall(require, "nvim_comment")
+print(status_ok)
 if not status_ok then
 	return
 end

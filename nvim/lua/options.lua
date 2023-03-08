@@ -1,8 +1,6 @@
 local cmd                = vim.cmd
 local opt                = vim.opt
 
-vim.g.NERDTreeQuitOnOpen = 1
-
 opt.completeopt          = 'menuone,noinsert,noselect'
 opt.ignorecase           = true
 opt.hlsearch             = true

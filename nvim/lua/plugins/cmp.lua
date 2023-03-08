@@ -1,5 +1,3 @@
-print('here load cmp.lua')
--- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
