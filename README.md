@@ -1,7 +1,6 @@
 # My person dotfiles for neovim
-teste
 
-I'm a dotnet developer and studie some stuffs.
+I use this to dotnet, js, etc.
 
 ## What i use
 - [i3:](https://github.com/i3/i3) workspaces goood, i feeling like parkour
