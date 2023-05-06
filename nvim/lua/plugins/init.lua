@@ -161,4 +161,36 @@ return require('packer').startup(function(use)
     }
 
     use { 'tpope/vim-fugitive' }
+    use { 
+        'dcampos/nvim-snippy',
+        config = function()
+            require('plugins.snippy')
+        end
+  }
+
+  use {
+      "nvim-telescope/telescope-file-browser.nvim",
+      requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  }
+
+    -- Lua
+  use {
+    "folke/trouble.nvim",
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
+          {silent = true, noremap = true}
+        )
+      }
+    end
+  }
+
+  use {
+    "windwp/nvim-ts-autotag",
+    config = function ()
+      require('nvim-ts-autotag').setup()
+    end
+  }
+
 end)
