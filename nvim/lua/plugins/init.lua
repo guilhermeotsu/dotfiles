@@ -40,8 +40,6 @@ return require('packer').startup(function(use)
         end,
     }
 
-    use {'kdheepak/lazygit.nvim' }
-
     use {
         "akinsho/toggleterm.nvim",
         tag = '*',
@@ -173,16 +171,11 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { 
+    use {
         'dcampos/nvim-snippy',
         config = function()
-            require('plugins.snippy')
+    --        require('snippy').setup()
         end
-    }
-
-    use {
-        "nvim-telescope/telescope-file-browser.nvim",
-        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
     }
 
     -- Lua
@@ -202,6 +195,14 @@ return require('packer').startup(function(use)
         "windwp/nvim-ts-autotag",
         config = function ()
             require('nvim-ts-autotag').setup()
+        end
+    }
+
+    use { 'christoomey/vim-tmux-navigator' }
+    use {
+        'nvim-tree/nvim-tree.lua',
+        config = function ()
+           require('nvim-tree').setup()
         end
     }
 end)
