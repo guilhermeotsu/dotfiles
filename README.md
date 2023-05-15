@@ -20,4 +20,4 @@ I use this to dotnet, js, etc..
 - [ ] Configure keyboard layout to use cedilha and accents
 
 ### Suggestion
-I like to use some and try new things, so any suggestion are welcome if you have one open a PR. You will make me happy.
+I like to use some and try new things, so any suggestion are welcome if you have one open a PR. You will make me happy..
