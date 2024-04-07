@@ -1,0 +1,6 @@
+[shell]
+program = "/usr/bin/fish"
+
+[font]
+normal = { family = "JetBrainsMono", style = "regular" }
+size = 13.0
