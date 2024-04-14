@@ -104,6 +104,6 @@ lspconfig.lua_ls.setup{
   }
 }
 
-lspconfig.emmet_ls.setup{}
+-- lspconfig.emmet_ls.setup{}
 lspconfig.tsserver.setup{}
 -- lspconfig.sourcekit.setup{}

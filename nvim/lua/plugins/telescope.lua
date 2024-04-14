@@ -38,8 +38,8 @@ vim.keymap.set('n', '<leader><leader>', builtin.find_files, {})
 
 vim.keymap.set('n', '<leader>rg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})
-vim.keymap.set('n', '<leader>brg', builtin.current_buffer_fuzzy_find, {})
-vim.keymap.set('n', '<leader>btg', builtin.current_buffer_tags, {})
+-- vim.keymap.set('n', '<leader>brg', builtin.current_buffer_fuzzy_find, {})
+-- vim.keymap.set('n', '<leader>btg', builtin.current_buffer_tags, {})
 vim.keymap.set('n', '<leader>/', builtin.search_history, {})
 
 -- search word under curson
@@ -55,6 +55,7 @@ vim.keymap.set('n', '<leader>gi', builtin.git_commits, {})
 vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
 vim.keymap.set('n', '<leader>gs', builtin.git_stash, {})
 vim.keymap.set('n', '<leader>p', builtin.git_files, {})
+vim.keymap.set('n', '<leader>z', builtin.git_files, {})
 
 vim.keymap.set('n', '<leader>tr', builtin.treesitter, {})
 

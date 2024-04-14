@@ -33,7 +33,7 @@ return require('packer').startup(function(use)
 
   -- telescope
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    'nvim-telescope/telescope.nvim', tag = '0.1.6',
     requires = { {'nvim-lua/plenary.nvim'} },
     config = function()
       require 'plugins/telescope'
@@ -70,7 +70,7 @@ return require('packer').startup(function(use)
     'williamboman/mason-lspconfig.nvim',
     config = function()
       require('mason-lspconfig').setup{
-        ensure_installed = { 'omnisharp', 'tsserver', 'lua_ls', 'html', 'cssls', 'dockerls', 'jsonls', 'zk', 'emmet_ls' },
+        ensure_installed = { 'omnisharp', 'tsserver', 'lua_ls', 'html', 'cssls', 'jsonls'  },
         automatic_installation = true,
       }
       require('plugins/lsp')
@@ -103,10 +103,7 @@ end,
   use {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("indent_blankline").setup {
-        show_current_context = true,
-        show_current_context_start = true,
-      }
+      require("ibl").setup{}
     end,
   }
 
@@ -128,19 +125,19 @@ end,
   -- navigate between overload methods signature help for dotnet
   use { 'Issafalcon/lsp-overloads.nvim', }
 
-  use ({
-    'mfussenegger/nvim-dap',
-    config = function ()
-      require('plugins.dap')
-    end
-  })
+  -- use ({
+  --   'mfussenegger/nvim-dap',
+  --   config = function ()
+  --     require('plugins.dap')
+  --   end
+  -- })
 
-  use { "rcarriga/nvim-dap-ui",
-    requires = {"mfussenegger/nvim-dap"},
-    config = function ()
-      require("dapui").setup()
-    end
-  }
+  -- use { "rcarriga/nvim-dap-ui",
+  --   requires = {"mfussenegger/nvim-dap"},
+  --   config = function ()
+  --     require("dapui").setup()
+  --   end
+  -- }
 
   -- tabs view
   use {
@@ -210,4 +207,9 @@ end,
   }
 
   use { 'christoomey/vim-tmux-navigator' }
+
+  use { 'norcalli/nvim-colorizer.lua', config = function ()
+    require'colorizer'.setup()
+  end 
+  }
 end)

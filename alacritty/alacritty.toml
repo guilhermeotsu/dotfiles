@@ -2,5 +2,8 @@
 program = "/usr/bin/fish"
 
 [font]
-normal = { family = "JetBrainsMono", style = "regular" }
+normal = { family = "JetBrainsMonoNerdFont", style = "regular" }
 size = 13.0
+
+[env]
+term = "xterm-256color"
