@@ -208,8 +208,7 @@ end,
 
   use { 'christoomey/vim-tmux-navigator' }
 
-  use { 'norcalli/nvim-colorizer.lua', config = function ()
-    require'colorizer'.setup()
-  end 
-  }
+  use { 'norcalli/nvim-colorizer.lua', config = function () require'colorizer'.setup() end }
+
+  use({ "stevearc/oil.nvim", config = function() require("oil").setup() end, })
 end)
