@@ -104,6 +104,8 @@ lspconfig.lua_ls.setup{
   }
 }
 
+-- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
+-- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 -- lspconfig.emmet_ls.setup{}
 lspconfig.tsserver.setup{}
 -- lspconfig.sourcekit.setup{}

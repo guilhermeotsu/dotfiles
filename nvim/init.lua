@@ -1,4 +1,4 @@
-require('plugins')
-require('options')
-require('keymap')
-require('theme')
+require("options")
+require("keymap")
+require("plugins")
+require("theme")

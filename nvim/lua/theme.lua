@@ -1,6 +1,6 @@
 vim.cmd("let g:nvcode_termcolors=256")
 
-vim.g.catppuccin_flavour = "frappe"
+vim.g.catppuccin_flavour = "macchiato"
 
 -- Configure catppuccin
 require("catppuccin").setup({
@@ -12,3 +12,4 @@ require("catppuccin").setup({
 })
 
 vim.cmd([[colorscheme catppuccin]])
+-- vim.o.background = "light"

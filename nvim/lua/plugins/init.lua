@@ -1,18 +1,14 @@
 vim.cmd [[packadd packer.nvim]]
 
-require('impatient')
-
 return require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim' }
+
 
   -- go to definition replace for dotnet
   use { 'Hoffs/omnisharp-extended-lsp.nvim' }
 
   -- colorsheme
   use { 'catppuccin/nvim' }
-
-  -- improve performance
-  use { 'lewis6991/impatient.nvim' }
 
   -- syntax, highlight
   use {
@@ -41,14 +37,6 @@ return require('packer').startup(function(use)
   }
 
   use {
-    "akinsho/toggleterm.nvim",
-    tag = '*',
-    config = function()
-      require("toggleterm").setup()
-    end
-}
-
-  use {
     'crusj/bookmarks.nvim',
     branch = 'main',
     requires = { 'kyazdani42/nvim-web-devicons' },
@@ -56,6 +44,7 @@ return require('packer').startup(function(use)
       require("plugins.bookmarks")
     end
   }
+  
   use 'iamcco/markdown-preview.nvim'
 
   -- lsp config
@@ -64,20 +53,16 @@ return require('packer').startup(function(use)
     config = function()
       require('mason').setup()
     end,
-}
+  }
 
   use {
     'williamboman/mason-lspconfig.nvim',
     config = function()
-      require('mason-lspconfig').setup{
-        ensure_installed = { 'omnisharp', 'tsserver', 'lua_ls', 'html', 'cssls', 'jsonls'  },
-        automatic_installation = true,
-      }
-      require('plugins/lsp')
+      require('mason-lspconfig').setup()
     end,
   }
 
-  use { 'neovim/nvim-lspconfig' }
+  use { 'neovim/nvim-lspconfig', config = function() require('plugins/lsp') end }
 
   -- autocomplete
   use {
@@ -90,7 +75,7 @@ return require('packer').startup(function(use)
     },
     config = function()
       require 'plugins/cmp'
-end,
+    end,
   }
 
   use {
@@ -107,10 +92,10 @@ end,
     end,
   }
 
-
   -- go to reference, code action, definition, diagnostics, etc
   use({
-    "glepnir/lspsaga.nvim",
+    "nvimdev/lspsaga.nvim",
+    after = 'nvim-lspconfig',
     branch = "main",
     config = function()
       require("plugins/lspsaga")
@@ -122,6 +107,7 @@ end,
   })
 
   use 'nvim-tree/nvim-web-devicons'
+  
   -- navigate between overload methods signature help for dotnet
   use { 'Issafalcon/lsp-overloads.nvim', }
 
@@ -160,7 +146,7 @@ end,
     end,
   }
 
-  use { 'tpope/vim-fugitive' }
+  -- use { 'tpope/vim-fugitive' }
 
   use {
     'folke/zen-mode.nvim',
@@ -210,5 +196,20 @@ end,
 
   use { 'norcalli/nvim-colorizer.lua', config = function () require'colorizer'.setup() end }
 
-  use({ "stevearc/oil.nvim", config = function() require("oil").setup() end, })
+  use({ "stevearc/oil.nvim", config = function()
+    require("oil").setup()
+    vim.keymap.set('n', '-', ':Oil<CR>', {})
+  end
+  })
+
+  -- use({
+  --   "kylechui/nvim-surround",
+  --   tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+  --   config = function() require("nvim-surround").setup({ })
+  --   end
+  -- })
+
+  -- use { "tpope/vim-repeat" }
+  -- use { "ggandor/leap.nvim", config = function() require('leap').create_default_mappings() end }
+
 end)

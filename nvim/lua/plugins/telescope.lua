@@ -4,36 +4,34 @@ local actions = require('telescope.actions')
 local telescope = require('telescope')
 
 telescope.setup({
-    defaults = {
-        mappings = {
-            n = {
-                ['q'] = actions.close
-            }
-        }
-    },
-    pickers = {
-        find_files = {
-            theme = "dropdown"
-        },
-        git_files = {
-            theme = "dropdown"
-        }
-    },
-    extensions = {
-        file_browser = {
-            theme = 'dropdown',
-            hijack_newtw = true,
-            mappings = {
-                ['i'] = {
-                    ['<C-w>'] = function() vim.cmd('normal vbd') end,
-                }
-            }
-        }
+  defaults = {
+    mappings = {
+      n = {
+        ['q'] = actions.close
+      }
     }
+  },
+  pickers = {
+    git_files = {
+      theme = "dropdown"
+    }
+  },
+  extensions = {
+    file_browser = {
+      theme = 'dropdown',
+      hijack_newtw = true,
+      mappings = {
+        ['i'] = {
+          ['<C-w>'] = function() vim.cmd('normal vbd') end,
+        }
+      }
+    }
+  }
 })
 
 --print(extend_omnisharp.telescope_lsp_definitions())
 
+vim.keymap.set('n', '<C-space>', builtin.find_files, {})
 vim.keymap.set('n', '<leader><leader>', builtin.find_files, {})
 
 vim.keymap.set('n', '<leader>rg', builtin.live_grep, {})
@@ -58,5 +56,7 @@ vim.keymap.set('n', '<leader>p', builtin.git_files, {})
 vim.keymap.set('n', '<leader>z', builtin.resume, {})
 
 vim.keymap.set('n', '<leader>tr', builtin.treesitter, {})
+vim.keymap.set('n', '@', ':lua require("telescope.builtin").lsp_workspace_symbols({ symbols = "function"})<CR>', {})
+vim.keymap.set('n', '<C-m>', ':lua require("telescope.builtin").lsp_document_symbols({ symbols = "function"})<CR>', {})
 
 -- vim.keymap.set('n', '<leader>te', extend_omnisharp.telescope_lsp_definitions(), {})
