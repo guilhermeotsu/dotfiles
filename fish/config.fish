@@ -13,4 +13,7 @@ set -gx PATH $ANDROID_HOME/platform-tools $PATH;
 
 set --export JAVA_HOME /usr/lib/jvm/java-17-openjdk
 set -gx PATH $JAVA_HOME/bin $PATH;
+
+set --export DOTNET_ROOT $HOME/.dotnet/
+set -gx PATH $DOTNET_ROOT/tools $PATH;
 # starship init fish | source
