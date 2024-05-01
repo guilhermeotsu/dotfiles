@@ -20,23 +20,6 @@ return {
         },
         dynamic_preview_title = true,
       },
-      -- pickers = {
-      --   find_files = {
-      --     sort_lastused = true,
-      --     hidden = true,
-      --     theme = "dropdown"
-      --   },
-      --   git_files = {
-      --     sort_lastused = true,
-      --     theme = "dropdown"
-      --   },
-      --   resume = {
-      --     theme = "dropdown"
-      --   },
-      --   buffers = {
-      --     theme = "dropdown"
-      --   }
-      -- }
     })
 
     local builtin = require("telescope.builtin")
@@ -47,7 +30,7 @@ return {
     vim.keymap.set("n", "<leader>b", builtin.buffers, {})
     vim.keymap.set("n", "<leader>gc", builtin.git_commits, {})
     vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
-    vim.keymap.set("n", '@', ':lua require("telescope.builtin").lsp_workspace_symbols({ symbols = "function"})<CR>', {})
+    vim.keymap.set("n", '<C-q>', ':lua require("telescope.builtin").lsp_workspace_symbols({ symbols = "function"})<CR>', {})
     vim.keymap.set("n", '<C-m>', ':lua require("telescope.builtin").lsp_document_symbols({ symbols = "function"})<CR>', {})
   end,
 }
