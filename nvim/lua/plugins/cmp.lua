@@ -4,17 +4,15 @@ return {
   dependencies = {
     "hrsh7th/cmp-buffer", -- source for text in buffer
     "hrsh7th/cmp-path", -- source for file system paths
-    "L3MON4D3/LuaSnip", -- snippet engine
-    "saadparwaiz1/cmp_luasnip", -- for autocompletion
+    "dcampos/nvim-snippy",
+    "dcampos/cmp-snippy",
     "onsails/lspkind.nvim", -- vs-code like pictograms
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-cmdline",
   },
   config = function()
     local cmp = require("cmp")
-
-    local luasnip = require("luasnip")
-
+    local snippy = require("snippy")
     local lspkind = require("lspkind")
 
     cmp.setup({
@@ -29,7 +27,7 @@ return {
       },
       snippet = { -- configure how nvim-cmp interacts with snippet engine
         expand = function(args)
-          luasnip.lsp_expand(args.body)
+          snippy.expand(args.body)
         end,
       },
       mapping = cmp.mapping.preset.insert({
@@ -39,7 +37,7 @@ return {
       }),
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "luasnip" }, -- For luasnip users.
+        { name= "snippy"},
         { name = "crates" },
       }, {
           { name = "buffer" },
@@ -73,9 +71,13 @@ return {
         }),
     })
 
-    -- snippets
-    require("luasnip.loaders.from_vscode").load({
-      paths = { "~/dotfiles/nvim/snippets" },
+    snippy.setup({
+      mappings = {
+        is = {
+          ['<Tab>'] = 'expand_or_advance',
+          ['<S-Tab>'] = 'previous',
+        },
+      },
     })
   end,
 }
