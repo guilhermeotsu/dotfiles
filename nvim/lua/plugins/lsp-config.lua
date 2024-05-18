@@ -28,12 +28,30 @@ return {
     opts = {},
   },
   {
+    -- omnisharp
+    "Issafalcon/lsp-overloads.nvim",
+    opts = {},
+  },
+  {
     "neovim/nvim-lspconfig",
     depends = { "nvim-lua/lsp-status.nvim" },
     config = function()
       local lspconfig = require("lspconfig")
       lspconfig.lua_ls.setup({})
       lspconfig.tsserver.setup({})
+
+      lspconfig.omnisharp.setup {
+        cmd = {
+          vim.fn.stdpath("data") .. "/mason/packages/omnisharp/omnisharp"
+        },
+        on_attach = function(client)
+          --- Guard against servers without the signatureHelper capability
+          if client.server_capabilities.signatureHelpProvider then
+            print('client server signature help omnisharp')
+            --require('lsp-overloads').setup(client, { })
+          end
+        end
+      }
       -- lspconfig.omnisharp.setup{
       --   handlers={
       --     ["textDocument/definition"] = require("omnisharp_extend").handler,
@@ -100,7 +118,7 @@ return {
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-          vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("n", "<leader>s", vim.lsp.buf.signature_help, opts)
           vim.keymap.set("n", "<leader>f", function()
             vim.lsp.buf.format({ async = true })
           end, opts)
