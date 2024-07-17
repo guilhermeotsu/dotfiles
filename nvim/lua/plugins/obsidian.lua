@@ -15,37 +15,42 @@ return {
       "nvim-lua/plenary.nvim",
     },
     opts = {
-      workspaces = {
-        {
-          name = "personal",
-          path = "~/vaults/personal",
-        },
-        {
-          name = "work",
-          path = "~/vaults/work",
-        },
-      },
-    },
-    -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
-    completion = {
-      nvim_cmp = true,
-      -- Trigger completion at 2 chars.
-      min_chars = 2,
-    },
+      dir = "~/vaults",
 
-    mappings = {
-      ["gd"] = {
-        action = function()
-          return require("obsidian").util.gf_passthrough()
-        end,
-        opts = { noremap = false, expr = true, buffer = true },
+      -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
+      completion = {
+        nvim_cmp = true,
+        -- Trigger completion at 2 chars.
+        min_chars = 2,
       },
-      ["<leader>tt"] = {
-        action = function()
-          return require("obsidian").util.toggle_checkbox()
-        end,
-        opts = { buffer = true },
-      }
-    }
+
+      mappings = {
+        ["gd"] = {
+          action = function()
+            return require("obsidian").util.gf_passthrough()
+          end,
+          opts = { noremap = false, expr = true, buffer = true },
+        },
+        ["<leader>tt"] = {
+          action = function()
+            return require("obsidian").util.toggle_checkbox()
+          end,
+          opts = { buffer = true },
+        }
+      },
+
+      templates = {
+        folder = "templates",
+        date_format = "%Y-%m-%d-%a"
+      },
+
+      daily_notes = {
+        folder = "daily-notes",
+        default_tags = { "daily" },
+        template = "daily.md"
+      },
+
+      new_notes_location = "current_dir"
+    },
   },
 }
