@@ -9,7 +9,7 @@ return {
         underline = true,
         virtual_text = {
           spacing = 5,
-          severity_limit = 'Warning',
+          -- severity_limit = 'Warning', -- deprecated
         },
         update_in_insert = true,
       }

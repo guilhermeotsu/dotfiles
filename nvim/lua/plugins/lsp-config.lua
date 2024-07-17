@@ -29,8 +29,8 @@ return {
   },
   {
     -- omnisharp
-    "Issafalcon/lsp-overloads.nvim",
-    opts = {},
+    -- "Issafalcon/lsp-overloads.nvim",
+    -- opts = {},
   },
   {
     "neovim/nvim-lspconfig",

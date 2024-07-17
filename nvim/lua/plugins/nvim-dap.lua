@@ -31,6 +31,8 @@ return
       -- vim.keymap.set("n", "<C-F5>", require("dapui").toggle, {})
       vim.keymap.set("n", "<F10>", dap.step_over, {})
       vim.keymap.set("n", "<F11>", dap.step_into, {})
+      vim.keymap.set("n", "<F8>", dap.repl.toggle, {})
+      vim.keymap.set("n", "<leader>bl", dap.list_breakpoints, {})
 
       vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
         widgets.hover()

@@ -7,7 +7,7 @@ return {
       }
     }
 
-    vim.keymap.set( "n",
+    vim.keymap.set("n",
       "<leader>a",
       "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>"
     )
