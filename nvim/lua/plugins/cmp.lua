@@ -9,6 +9,7 @@ return {
     "onsails/lspkind.nvim", -- vs-code like pictograms
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-cmdline",
+    "hrsh7th/cmp-nvim-lsp-signature-help"
   },
   config = function()
     local cmp = require("cmp")
@@ -41,6 +42,7 @@ return {
         { name = "nvim_lsp" },
         { name= "snippy"},
         { name = "crates" },
+        { name = "nvim_lsp_signature_help" }
       }, {
           { name = "buffer" },
         }),
