@@ -1,6 +1,7 @@
 return {
   "tomasky/bookmarks.nvim",
   event = "VimEnter",
+  enable = false,
   config = function()
     require("bookmarks").setup{
       on_attach = function() 

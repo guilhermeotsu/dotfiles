@@ -47,7 +47,7 @@ return {
         on_attach = function(client)
           --- Guard against servers without the signatureHelper capability
           if client.server_capabilities.signatureHelpProvider then
-            print('client server signature help omnisharp')
+            -- print('client server signature help omnisharp')
             --require('lsp-overloads').setup(client, { })
           end
         end
@@ -103,6 +103,13 @@ return {
         vim.lsp.handlers.signature_help(err, result, ctx, config)
       end
 
+      local signs = { Error = "X", Warning = "A", Hint = "", Information = "" }
+
+      for type, icon in pairs(signs) do
+        local hl = 'LspDiagnostiscSign' .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+      end
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
@@ -113,7 +120,7 @@ return {
           -- See `:help vim.lsp.*` for documentation on any of the below functions
           local opts = { buffer = ev.buf }
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+          -- vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
           -- vim.keymap.set("n", "D", vim.diagnostic.open_float, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)

@@ -19,7 +19,9 @@ return {
         "markdown",
         "markdown_inline",
         "c",
-        "c_sharp"
+        "c_sharp",
+        "vim",
+        "vimdoc"
       },
       sync_install = false,
       auto_install = false,
