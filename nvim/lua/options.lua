@@ -1,4 +1,3 @@
-local cmd                = vim.cmd
 local opt                = vim.opt
 
 opt.completeopt          = 'menuone,noinsert,noselect'
@@ -27,9 +26,9 @@ opt.backup               = true
 opt.backupdir            = '/tmp//,.'
 opt.writebackup          = false
 opt.swapfile             = false
-opt.wrap                 = false
+opt.wrap                 = true
 opt.backspace            = 'indent,eol,start'
 opt.guicursor            = 'i:block' -- chad fat cursor insert mode
 opt.list                 = true
-vim.opt.termguicolors    = true
+opt.termguicolors        = true
 opt.conceallevel         = 1 -- obsidian nvim
