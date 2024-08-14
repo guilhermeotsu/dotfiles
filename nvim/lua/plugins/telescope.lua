@@ -20,7 +20,9 @@ return {
           "node_modules",
           "yarn.lock",
           "fonts",
-          ".DS_Store"
+          ".DS_Store",
+          "bin",
+          "obj"
         },
         dynamic_preview_title = true,
       },
