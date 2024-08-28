@@ -1,4 +1,4 @@
--- nvim-dap improve .net debugging https://github.com/mfussenegger/nvim-dap/wiki/Cookbook#making-debugging-net-easier
+-- -- nvim-dap improve .net debugging https://github.com/mfussenegger/nvim-dap/wiki/Cookbook#making-debugging-net-easier
 vim.g.dotnet_build_project = function()
   local default_path = vim.fn.getcwd() .. '/'
   if vim.g['dotnet_last_proj_path'] ~= nil then
@@ -24,13 +24,13 @@ vim.g.dotnet_get_dll_path = function()
     end
     local procs = {}
     for _, csprojPath in
-      ipairs(vim.fn.glob(vim.fn.getcwd() .. "**/*.csproj", false, true))
+    ipairs(vim.fn.glob(vim.fn.getcwd() .. "**/*.csproj", false, true))
     do
       local name = vim.fn.fnamemodify(csprojPath, ":t:r")
       for _, path in
-        ipairs(
-          vim.fn.glob(vim.fn.getcwd() .. "**/bin/**/" .. name .. ".dll", false, true)
-        )
+      ipairs(
+        vim.fn.glob(vim.fn.getcwd() .. "**/bin/**/" .. name .. ".dll", false, true)
+      )
       do
         table.insert(procs, {
           path = path,
@@ -50,11 +50,11 @@ vim.g.dotnet_get_dll_path = function()
     vim.g["dotnet_last_dll_path"] = request()
   else
     if
-      vim.fn.confirm(
-        "Do you want to change the path to dll?\n" .. vim.g["dotnet_last_dll_path"],
-        "&yes\n&no",
-        2
-      ) == 1
+        vim.fn.confirm(
+          "Do you want to change the path to dll?\n" .. vim.g["dotnet_last_dll_path"],
+          "&yes\n&no",
+          2
+        ) == 1
     then
       vim.g["dotnet_last_dll_path"] = request()
     end
@@ -70,7 +70,7 @@ return
   dependencies = { "nvim-neotest/nvim-nio" },
   config = function()
     -- require("dapui").setup()
-
+--
     local dap = require('dap')
     local widgets = require('dap.ui.widgets')
 
@@ -101,12 +101,19 @@ return
     }
 
     vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, {})
-    vim.keymap.set("n", "<F5>", dap.continue, {})
+    vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debugger: Start/Continue" })
+    vim.keymap.set("n", "<F29>", function() dap.restart_frame() end, { desc = "Debugger: Restart" }) -- C-F5
     -- vim.keymap.set("n", "<C-F5>", require("dapui").toggle, {})
     vim.keymap.set("n", "<F10>", dap.step_over, {})
     vim.keymap.set("n", "<F11>", dap.step_into, {})
     vim.keymap.set("n", "<F8>", dap.repl.toggle, {})
     vim.keymap.set("n", "<leader>bl", dap.list_breakpoints, {})
+    vim.keymap.set("n", "<F33>", function()
+      vim.ui.input({ prompt = "Condition: " }, function(condition)
+        if condition then require("dap").set_breakpoint(condition) end
+      end)
+    end,
+    { desc = "Debugger: Condition Breakpoint (C-F8)" })
 
     vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
       widgets.hover()
