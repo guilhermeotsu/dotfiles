@@ -1,9 +1,9 @@
 [shell]
-program = "/usr/bin/fish"
+program = "/usr/bin/bash"
 
 [font]
-normal = { family = "JetBrainsMonoNerdFont", style = "regular" }
-size = 13.0
+normal = { family = "JetBrainsMono", style = "regular" }
+size = 11.0
 
 [env]
 term = "xterm-256color"
