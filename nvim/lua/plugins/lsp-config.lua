@@ -8,7 +8,7 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "biome", "tsserver" },
+        ensure_installed = { "lua_ls", "biome", "ts_ls" },
       })
       require("mason-tool-installer").setup({
         ensure_installed = {
@@ -40,7 +40,7 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
       lspconfig.lua_ls.setup({})
-      lspconfig.tsserver.setup({})
+      lspconfig.ts_ls.setup({})
 
       lspconfig.omnisharp.setup {
         cmd = {
