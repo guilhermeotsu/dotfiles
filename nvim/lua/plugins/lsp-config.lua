@@ -23,16 +23,10 @@ return {
     end,
   },
   {
+    "Issafalcon/lsp-overloads.nvim",
+    "Hoffs/omnisharp-extended-lsp.nvim",
     "j-hui/fidget.nvim",
     opts = {},
-  },
-  {
-    "Hoffs/omnisharp-extended-lsp.nvim"
-  },
-  {
-    -- omnisharp
-    -- "Issafalcon/lsp-overloads.nvim",
-    -- opts = {},
   },
   {
     "neovim/nvim-lspconfig",
@@ -46,22 +40,28 @@ return {
         cmd = {
           vim.fn.stdpath("data") .. "/mason/packages/omnisharp/omnisharp"
         },
+        handlers = {
+          ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
+          ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
+          ["textDocument/references"] = require('omnisharp_extended').references_handler,
+          ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
+        },
         on_attach = function(client, bufnr)
           --- Guard against servers eithout the signatureHelper capability
-          -- if client.server_capabilities.signatureHelpProvider then
-          -- vim.api.nvim_set_keymap("n", "<leader>o", ":LspOverloadsSignature<CR>", { noremap = true, silent = true, buffer = bufnr })
-          -- local lsp_overloads_ok, lsp_overloads = pcall(require, "lsp-overloads")
-          -- if lsp_overloads_ok then
-          --   lsp_overloads.setup(client, {
-          --     ui = {
-          --       close_events = { "CursorMoved", "CursorMovedI", "InsertCharPre" },
-          --       floating_window_above_cur_line = true,
-          --       silent = true,
-          --     }
-          --   })
-          -- end
-          -- end
-
+          if client.server_capabilities.signatureHelpProvider then
+            vim.keymap.set("n", "<leader>o", ":LspOverloadsSignature<CR>",
+              { noremap = true, silent = true, buffer = bufnr })
+            local lsp_overloads_ok, lsp_overloads = pcall(require, "lsp-overloads")
+            if lsp_overloads_ok then
+              lsp_overloads.setup(client, {
+                ui = {
+                  close_events = { "CursorMoved", "CursorMovedI", "InsertCharPre" },
+                  floating_window_above_cur_line = true,
+                  silent = true,
+                }
+              })
+            end
+          end
         end
       }
 
@@ -106,10 +106,6 @@ return {
       end
 
       -- Wrap handlers for dotnet
-      -- lsp_handlers["textDocument/definition"] = require('omnisharp_extended').definition_handler
-      -- lsp_handlers["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler
-      -- lsp_handlers["textDocument/references"] = require('omnisharp_extended').references_handler
-      -- lsp_handlers["textDocument/implementation"] = require('omnisharp_extended').implementation_handler
 
       local signs = { Error = "X", Warning = "A", Hint = "", Information = "" }
 
@@ -121,7 +117,6 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
-          local omni_ext = require('omnisharp_extended')
           -- Enable completion triggered by <c-x><c-o>
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
@@ -138,9 +133,6 @@ return {
           vim.keymap.set("n", "<leader>f", function()
             vim.lsp.buf.format({ async = true })
           end, opts)
-
-          vim.keymap.set("n", "<leader>gd", omni_ext.definition_handler)
-          vim.keymap.set("n", "<leader>gi", omni_ext.implementation_handler)
         end,
       })
     end,
