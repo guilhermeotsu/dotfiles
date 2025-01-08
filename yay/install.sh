@@ -1,2 +1,2 @@
 #!bin/bash
-yay -S $(cat packages.txt)
+yay -S --needed - < packages.txt
