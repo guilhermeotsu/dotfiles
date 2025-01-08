@@ -1,5 +1,6 @@
 -- -- nvim-dap improve .net debugging https://github.com/mfussenegger/nvim-dap/wiki/Cookbook#making-debugging-net-easier
 vim.g.dotnet_build_project = function()
+
   local default_path = vim.fn.getcwd() .. '/'
   if vim.g['dotnet_last_proj_path'] ~= nil then
     default_path = vim.g['dotnet_last_proj_path']
@@ -70,7 +71,6 @@ return
   dependencies = { "nvim-neotest/nvim-nio" },
   config = function()
     -- require("dapui").setup()
---
     local dap = require('dap')
     local widgets = require('dap.ui.widgets')
 

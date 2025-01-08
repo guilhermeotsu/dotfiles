@@ -11,9 +11,11 @@
 for_window [class="^.*"] border pixel 2
 gaps inner 15
 
+# Change border color
 client.focused          #928374 #928374 #ffffff #928374 #928374
 
 set $mod Mod1
+set $super Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -38,8 +40,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec_always --no-startup-id pkill polybar && polybar
-exec_always --no-startup-id pkill greenclip && greenclip daemon &
+# exec_always pkill polybar && polybar &
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id pkill greenclip && greenclip clear && greenclip daemon &
 # exec_always --no-startup-id dmenu &
 # exec_always --no-startup-id clipmenud
 exec_always --no-startup-id picom --config ~/.dotfiles/picom/p.config
@@ -61,19 +64,22 @@ tiling_drag modifier titlebar
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec alacritty
-bindsym $mod+g exec qutebrowser
+# bindsym $mod+g exec qutebrowser
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -i -p 'Application: ' -fn JetBrainsMono:size=10
-bindsym $mod+d exec rofi -show drun
+#bindsym $mod+d exec rofi -show drun
+bindsym $mod+d exec $HOME/.local/src/rofi/files/launchers/type-2/launcher.sh
+
+bindsym $super+Shift+s exec --no-startup-id flameshot gui
 
 # start clipmenud
 # clipboard history for dmenu
 #bindsym $mod+Shift+d exec clipmenu -i -p 'Clipboard History: ' -fn JetBrainsMono:size=10
-bindsym $mod+Shift+d exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+# bindsym $super+v exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -192,11 +198,10 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-# bar {
-#         status_command i3status
-# }
+# Intead use polybar
+bar {
+        status_command i3status
+}
 
-#exec_always --no-startup-id blueberry-tray
-#exec --no-startup-id ~/.screenlayout/hdmi-only.sh
-exec ~/.screenlayout/vga-only.sh
-exec feh --bg-scale ~/.dotfiles/wallpapers/Voltz-2560x1748.jpg
+exec_always ~/.screenlayout/vga-only.sh
+exec_always feh --bg-scale ~/.dotfiles/wallpapers/Voltz-2560x1748.jpg

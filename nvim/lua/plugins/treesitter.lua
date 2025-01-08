@@ -1,10 +1,15 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  "nvim-treesitter/nvim-treesitter-context",
-  event = { "BufReadPre", "BufNewFile" },
+  -- dependencies = {
+  --   "dependencieswindwp/nvim-ts-autotag",
+  --   -- "nvim-treesitter/nvim-treesitter-context"
+  -- },
   build = ":TSUpdate",
+  lazy = vim.fn.argc(-1) == 0,
   config = function()
+    -- require('nvim-ts-autotag').setup{}
     local config = require("nvim-treesitter.configs")
+    -- local config = require("nvim-ts-autotag")
     config.setup({
       ensure_installed = {
         "lua",
@@ -23,8 +28,8 @@ return {
         "vim",
         "vimdoc"
       },
-      sync_install = false,
-      auto_install = false,
+      sync_install = true,
+      auto_install = true,
       highlight = { enable = true, additional_vim_regex_highlighting = false },
       indent = { enable = true },
       autotag = {
@@ -40,12 +45,5 @@ return {
         },
       },
     })
-
-    -- require("template-string").setup({})
-    -- fold
-    local opt = vim.opt
-    opt.foldmethod = "expr"
-    opt.foldexpr = "nvim_treesitter#foldexpr()"
-    opt.foldenable = false
   end,
 }

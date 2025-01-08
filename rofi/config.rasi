@@ -1,0 +1,9 @@
+configuration {
+  display-drun: "Applications";
+  display-window: "Windows";
+  display-clipboard: "Clipboard";
+  font: "JetBrainsMono Nerd Font Medium 12";
+  modi: "window,drun,ssh,emoji,calc";
+}
+
+@theme "./themes/gruvbox-dark.rasi"

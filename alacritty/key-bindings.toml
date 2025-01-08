@@ -1,0 +1,2 @@
+[keyboard]
+bindings = [{ key = "N", mods = "Control|Command", mode = "~Vi|Search", command = "nvim" },]

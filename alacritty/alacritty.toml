@@ -1,8 +1,7 @@
-import = [
-  "/usr/lib/node_modules/alacritty-themes/themes/Gruvbox-Light.toml"
-]
+[general]
+import = ['././key-bindings.toml']
 
-[shell]
+[terminal.shell]
 program = "/usr/bin/bash"
 
 [font]

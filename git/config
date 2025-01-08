@@ -2,17 +2,18 @@
 	email = guiotsu@gmail.com
 	name = guilherme otsu
 
-
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  commit = commit -v
+  bat-diff = diff --name-only --relative --diff-filter=d | xargs bat --diff
 
 [push]
   default = current
 
-# [delta]
-#    line-numbers = true
-#    syntax-theme = gruvbox
-#    side-by-side = false
+[delta]
+   line-numbers = true
+   syntax-theme = gruvbox
+   side-by-side = false
 
 #    file-modified-label = modified:
 
