@@ -6,14 +6,21 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
-      require("mason").setup()
+      require("mason").setup({
+        registries = {
+          "github:mason-org/mason-registry",
+          "github:Crashdummyy/mason-registry"
+        }
+      })
       require("mason-lspconfig").setup()
       require("mason-tool-installer").setup({
         ensure_installed = {
           "lua-language-server",
           "typescript-language-server",
           "biome",
-          "omnisharp",
+          -- "omnisharp",
+          "roslyn",
+          "rzls",
           "html",
           "cssls",
           "clangd",
@@ -31,7 +38,7 @@ return {
   },
   {
     "Issafalcon/lsp-overloads.nvim",
-    "Hoffs/omnisharp-extended-lsp.nvim",
+    -- "Hoffs/omnisharp-extended-lsp.nvim",
     "j-hui/fidget.nvim",
     "nvim-lua/lsp-status.nvim",
     opts = {},
@@ -70,6 +77,7 @@ return {
         "cssls",
         "bashls",
         "ruby_lsp",
+        -- "roslyn",
         -- "solargraph",
         -- "sorbet",
         "dockerls",
@@ -79,6 +87,10 @@ return {
       for _, server in ipairs(servers) do
         lspconfig[server].setup({
           on_attach = function(client, bufnr)
+            -- Guard against servers without the signatureHelper capability
+            if client.server_capabilities.signatureHelpProvider then
+              require('lsp-overloads').setup(client, { })
+            end
             lsp_status.on_attach(client)
           end,
           capabilities = capabilities
@@ -93,37 +105,37 @@ return {
         capabilities = capabilities
       })
 
-      lspconfig.omnisharp.setup(
-        {
-          cmd = {
-            vim.fn.stdpath("data") .. "/mason/packages/omnisharp/omnisharp"
-          },
-          handlers = {
-            ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
-            ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
-            ["textDocument/references"] = require('omnisharp_extended').references_handler,
-            ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
-          },
-          on_attach = function(client, bufnr)
-            lsp_status.on_attach(client)
-            --- Guard against servers eithout the signatureHelper capability
-            if client.server_capabilities.signatureHelpProvider then
-              vim.keymap.set("n", "<leader>o", ":LspOverloadsSignature<CR>",
-                { noremap = true, silent = true, buffer = bufnr })
-              local lsp_overloads_ok, lsp_overloads = pcall(require, "lsp-overloads")
-              if lsp_overloads_ok then
-                lsp_overloads.setup(client, {
-                  ui = {
-                    close_events = { "CursorMoved", "CursorMovedI", "InsertCharPre" },
-                    floating_window_above_cur_line = true,
-                    silent = true,
-                  }
-                })
-              end
-            end
-          end,
-          capabilities = capabilities
-        })
+      -- lspconfig.omnisharp.setup(
+      --   {
+      --     cmd = {
+      --       vim.fn.stdpath("data") .. "/mason/packages/omnisharp/omnisharp"
+      --     },
+      --     handlers = {
+      --       ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
+      --       ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
+      --       ["textDocument/references"] = require('omnisharp_extended').references_handler,
+      --       ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
+      --     },
+      --     on_attach = function(client, bufnr)
+      --       lsp_status.on_attach(client)
+      --       --- Guard against servers eithout the signatureHelper capability
+      --       if client.server_capabilities.signatureHelpProvider then
+      --         vim.keymap.set("n", "<leader>o", ":LspOverloadsSignature<CR>",
+      --           { noremap = true, silent = true, buffer = bufnr })
+      --         local lsp_overloads_ok, lsp_overloads = pcall(require, "lsp-overloads")
+      --         if lsp_overloads_ok then
+      --           lsp_overloads.setup(client, {
+      --             ui = {
+      --               close_events = { "CursorMoved", "CursorMovedI", "InsertCharPre" },
+      --               floating_window_above_cur_line = true,
+      --               silent = true,
+      --             }
+      --           })
+      --         end
+      --       end
+      --     end,
+      --     capabilities = capabilities
+      --   })
 
       local keymap = vim.keymap
       keymap.set("n", "[", vim.diagnostic.goto_prev)
