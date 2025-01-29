@@ -89,9 +89,8 @@ return {
           on_attach = function(client, bufnr)
             -- Guard against servers without the signatureHelper capability
             if client.server_capabilities.signatureHelpProvider then
-              require('lsp-overloads').setup(client, { })
+              require('lsp-overloads').setup(client, {})
             end
-            lsp_status.on_attach(client)
           end,
           capabilities = capabilities
         })
@@ -99,9 +98,6 @@ return {
 
       lspconfig.html.setup({
         filetypes = { "html", "cshtml", "javascript", "javascriptreact", "eruby" },
-        on_attach = function(client, bufnr)
-          lsp_status.on_attach(client)
-        end,
         capabilities = capabilities
       })
 
@@ -226,8 +222,8 @@ return {
           -- vim.keymap.set("n", "D", vim.diagnostic.open_float, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-          vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-          vim.keymap.set("n", "<leader>s", vim.lsp.buf.signature_help, opts)
+          -- vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+          vim.keymap.set("n", "<leader>l", vim.lsp.buf.signature_help, opts)
           vim.keymap.set("n", "<leader>f", function()
             vim.lsp.buf.format({ async = true })
           end, opts)

@@ -19,10 +19,10 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- manage windows
 vim.keymap.set('n', '<leader>v', ":vs<CR>")
 vim.keymap.set('n', '<leader>s', ":sp<CR>")
-vim.keymap.set('n', '<C-j>', '<c-w><c-j>')
-vim.keymap.set('n', '<C-k>', '<c-w><c-k>')
-vim.keymap.set('n', '<C-l>', '<c-w><c-l>')
-vim.keymap.set('n', '<C-h>', '<c-w><c-h>')
+-- vim.keymap.set('n', '<C-j>', '<c-w><c-j>')
+-- vim.keymap.set('n', '<C-k>', '<c-w><c-k>')
+-- vim.keymap.set('n', '<C-l>', '<c-w><c-l>')
+-- vim.keymap.set('n', '<C-h>', '<c-w><c-h>')
 
 -- alt shit hjkl
 vim.keymap.set('n', '<C-Left>', '<C-w>5<')

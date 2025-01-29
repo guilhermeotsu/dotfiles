@@ -13,7 +13,7 @@ return {
       }
     })
 
-    vim.keymap.set("n", "<leader>re", ":Lspsaga finder<CR>" )
+    -- vim.keymap.set("n", "<leader>re", ":Lspsaga finder<CR>" )
   end,
   dependencies = {
     'nvim-treesitter/nvim-treesitter',     -- optional

@@ -43,7 +43,7 @@ return {
           package = "",
         },
         mappings = {
-          run_test_from_buffer = { lhs = "<leader>r", desc = "run test from buffer" },
+          run_test_from_buffer = { lhs = "<C-R>", desc = "run test from buffer" },
           filter_failed_tests = { lhs = "<leader>fe", desc = "filter failed tests" },
           debug_test = { lhs = "<leader>d", desc = "debug test" },
           go_to_file = { lhs = "g", desc = "got to file" },
