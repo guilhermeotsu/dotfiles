@@ -1,14 +1,19 @@
 config.load_autoconfig(False)
 
-# search engines
-c.url.searchengines['g'] = 'https://www.google.com/search?q={}'
-c.url.searchengines['gh'] = 'https://github.com/search?q={}&type=repositories'
-c.url.searchengines['w'] = 'https://en.wikipedia.org/w/index.php?search={}&title=Special%3ASearch&ns0=1'
-c.url.searchengines['y'] = 'https://www.youtube.com/results?search_query={}'
-c.url.searchengines['f'] = 'https://www.facebook.com/marketplace/sorocaba/search/?query={}'
-c.url.searchengines['o'] = 'https://www.olx.com.br/brasil?q={}'
-c.url.searchengines['aw'] = 'https://wiki.archlinux.org/title/{}'
-c.url.searchengines['jad'] = 'http://www.jadlog.com.br/tracking?cte={}'
+# search enginesa
+c.url.searchengines = {
+    'DEFAULT': 'https://duckduckgo.com/?q={}',
+    'g': 'https://www.google.com/search?q={}',
+    'gh':'https://github.com/search?q={}&type=repositories',
+    'w':'https://en.wikipedia.org/w/index.php?search={}&title=Special%3ASearch&ns0=1',
+    'y':'https://www.youtube.com/results?search_query={}',
+    'f':'https://www.facebook.com/marketplace/sorocaba/search/?query={}',
+    'o':'https://www.olx.com.br/brasil?q={}',
+    'aw':'https://wiki.archlinux.org/title/{}',
+    'jad':'http://www.jadlog.com.br/tracking?cte={}',
+    'aur':'https://aur.archlinux.org/packages?O=0&SeB=nd&K={}&outdated=&SB=p&SO=d&PP=50&submit=Go',
+    'rdt': 'https://www.reddit.com/search/?q={}&cId=ea692ef8-56df-4104-901c-4a92de6b2ae1&iId=28e5506d-8c3e-4345-ae03-9e1912291b32'
+}
 
 c.completion.shrink = True
 c.url.start_pages = ["https://google.com"]
@@ -18,7 +23,12 @@ c.completion.use_best_match = True
 c.content.geolocation = 'ask'
 c.content.javascript.clipboard = 'access-paste'
 
-# c.bindings.default = {"normal": {"d": "scroll-page 0 0.5"}}
+# aliases
+c.aliases = {
+    'yt': 'open -t https://youtube.com',
+    'mail': 'open -t https://mail.google.com/mail/u/0/#inbox',
+    'disc': 'open -t https://discord.com/app',
+}
 
 # binds
 config.bind('<Ctrl-1>', 'tab-focus 1')
@@ -33,3 +43,5 @@ config.bind('<Ctrl-9>', 'tab-focus 9')
 config.bind('<Ctrl-0>', 'tab-focus 0')
 config.bind('d', 'scroll-page 0 0.5')
 config.bind('<Ctrl-l>', 'cmd-set-text :open {url:pretty}')
+config.bind('J', 'tab-prev')
+config.bind('K', 'tab-next')
