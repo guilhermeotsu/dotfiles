@@ -19,7 +19,8 @@ return {
       "fonts",
       ".DS_Store",
       "bin",
-      "obj"
+      "obj",
+      "tmp"
     },
     vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", {}),
     vim.keymap.set("n", "<leader>x", ":FzfLua lsp_document_diagnostics<CR>", {}),

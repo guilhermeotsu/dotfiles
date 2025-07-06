@@ -6,8 +6,9 @@ return {
     keymap = { preset = 'super-tab' },
     cmdline = { enabled = false },
     fuzzy = { implementation = "prefer_rust_with_warning" },
+    -- menu = { auto_show = false },
     appearance = {
-      use_nvim_cmp_as_default = true,
+      use_nvim_cmp_as_default = false,
       nerd_font_variant = 'mono'
     },
     sources = {
