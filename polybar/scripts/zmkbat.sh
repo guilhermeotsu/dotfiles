@@ -51,6 +51,10 @@ for ID in "${DEVICES_ARR[@]}"; do
         | grep -o '\(\<.*\>\)'
     )
 
+    if [ "$NAME" = "MX Ergo" ]; then
+      continue
+    fi
+
     # echo " $NAME ($ID):"
     OUTPUT+=" $NAME:"
 
