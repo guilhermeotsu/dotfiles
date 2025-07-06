@@ -8,7 +8,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # for multimonitor
 if type "xrandr"; then
-  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+  for m in $(xrandr --query | grep " primary" | cut -d" " -f1); do
     MONITOR=$m polybar --reload example & disown
   done
 else
